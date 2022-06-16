@@ -1,5 +1,7 @@
+import Productlist from "../components/Productlist";
+
 function Homepage() {
-  return <p>header</p>;
+  return <Productlist />;
 }
 
 export default Homepage;

@@ -4,7 +4,7 @@ function Header() {
       <span>logo</span>
       <form className="searchForm">
         <label className="searchIcon">
-          <i class="icon ion-md-search"></i>
+          <i className="icon ion-md-search"></i>
         </label>
         <input
           className="searchBar"
