@@ -2,7 +2,7 @@ import "./App.scss";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Header />
@@ -10,5 +10,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
