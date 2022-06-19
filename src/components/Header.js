@@ -1,7 +1,11 @@
+import logo from "../assets/logo.png";
+import cart from "../assets/icons/cart.png";
+import whislist from "../assets/icons/whislist.png";
+
 function Header() {
   return (
     <header className="header">
-      <span>logo</span>
+      <img src={logo} className="logo" alt="logo" />
       <form className="searchForm">
         <label className="searchIcon">
           <i className="icon ion-md-search"></i>
@@ -14,8 +18,12 @@ function Header() {
       </form>
       <nav>
         <ul>
-          <li>Cart</li>
-          <li>Whislist</li>
+          <li>
+            <img src={cart} />
+          </li>
+          <li>
+            <img src={whislist} />
+          </li>
         </ul>
       </nav>
     </header>

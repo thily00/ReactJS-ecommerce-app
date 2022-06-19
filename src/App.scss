@@ -2,8 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 10px 30px;
   background: white;
+  .logo {
+    width: 150px;
+  }
   .searchForm {
     flex: 0 1 500px;
     position: relative;
@@ -25,5 +28,16 @@
     display: flex;
     list-style: none;
     gap: 10px;
+    margin: 0;
+    padding: 0;
+    li {
+      img {
+        width: 24px;
+        height: 24px;
+      }
+      background: #e60f4785;
+      border-radius: 50px;
+      padding: 7px;
+    }
   }
 }
