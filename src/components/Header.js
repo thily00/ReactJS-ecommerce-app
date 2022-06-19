@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import cart from "../assets/icons/cart.png";
 import whislist from "../assets/icons/whislist.png";
+import search from "../assets/icons/search.png";
 import "../styles/header.scss";
 
 function Header() {
@@ -19,37 +20,41 @@ function Header() {
   });
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <header className="header">
-          <img src={logo} className="logo" alt="logo" />
-          <form className="searchForm">
-            <label className="searchIcon">
-              <i className="icon ion-md-search"></i>
-            </label>
-            <input
-              className="searchBar"
-              type="search"
-              placeholder="Rechercher un produit ..."
-            />
-          </form>
-          <nav>
-            <ul>
-              <li>
-                <img src={cart} />
-              </li>
-              <li>
-                <img src={whislist} />
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <ul className="categories">
-          {categories &&
-            categories.map((category) => {
-              return <li key={category}>{category}</li>;
-            })}
-        </ul>
+    <div className="container-fluid header">
+      <div className="container">
+        <div className="row">
+          <header>
+            <form className="searchForm">
+              <label className="searchIcon">
+                <img src={search} />
+              </label>
+              <input
+                className="searchBar"
+                type="search"
+                placeholder="Rechercher un produit ..."
+              />
+            </form>
+            <img src={logo} className="logo" alt="logo" />
+
+            <nav>
+              <ul>
+                <li>
+                  <img src={cart} />
+                </li>
+                <li>
+                  <img src={whislist} />
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <ul className="categories">
+            <li>Tous</li>
+            {categories &&
+              categories.map((category) => {
+                return <li key={category}>{category}</li>;
+              })}
+          </ul>
+        </div>
       </div>
     </div>
   );
