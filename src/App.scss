@@ -9,7 +9,7 @@
     height: 200px;
     object-fit: contain;
   }
-  .product_price {
+  .product_title {
     width: 200px;
     white-space: nowrap;
     overflow: hidden;
@@ -21,6 +21,26 @@
     margin-bottom: 5px;
     color: darkgrey;
     text-transform: capitalize;
+  }
+  .product_rating {
+    display: flex;
+    align-items: center;
+  }
+  .product_raters {
+    color: darkgrey;
+  }
+  .prices {
+    margin-top: 10px;
+  }
+  .product_price {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .product_dicountPrice {
+    margin-left: 10px;
+    text-decoration-line: line-through;
+    color: #d62d2d;
+    font-size: 16px;
   }
 }
 .products {
