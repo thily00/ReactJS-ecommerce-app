@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import logo from "../assets/logo.png";
 import cart from "../assets/icons/cart.png";
 import whislist from "../assets/icons/whislist.png";
+import cart_white from "../assets/icons/cart_white.png";
+import whislist_white from "../assets/icons/whislist_white.png";
 import search from "../assets/icons/search.png";
 import "../styles/header.scss";
 
@@ -34,12 +38,16 @@ function Header() {
                 placeholder="Rechercher un produit ..."
               />
             </form>
-            <img src={logo} className="logo" alt="logo" />
+            <Link to="/">
+              <img src={logo} className="logo" alt="logo" />
+            </Link>
 
             <nav>
               <ul>
                 <li>
-                  <img src={cart} />
+                  <Link to="/cart">
+                    <img src={cart} />
+                  </Link>
                 </li>
                 <li>
                   <img src={whislist} />

@@ -1,6 +1,8 @@
 .header {
   background: #ffffff;
   position: fixed;
+  z-index: 100;
+  top: 0;
 }
 header {
   display: flex;
@@ -10,6 +12,7 @@ header {
 
   .logo {
     width: 150px;
+    cursor: pointer;
   }
   .searchForm {
     flex: 0 1 250px;

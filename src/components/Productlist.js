@@ -1,5 +1,6 @@
 import "../App.scss";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Productlist() {
   const [data, setData] = useState(null);
@@ -17,17 +18,20 @@ function Productlist() {
   }
 
   return (
-    <div className="container px-4">
-      <div className="row gy-3 gx-5">
+    <div className="container">
+      <div className="row products gy-3 gx-3">
         {data &&
           data.map((product) => {
             return (
               <div className="col-lg-3 col-md-6" key={product.id}>
-                <div className="product">
-                  <img src={product.images.photos[0]} />
-                  <p>{product.title}</p>
-                  <strong>{product.price}</strong>
-                </div>
+                <Link to={`/product/${product.id}`}>
+                  <div className="product">
+                    <img src={product.images.photos[0]} />
+                    <p className="product_price">{product.title}</p>
+                    <p className="product_category">{product.category}</p>
+                    <strong>{product.price}</strong>
+                  </div>
+                </Link>
               </div>
             );
           })}
