@@ -1,3 +1,6 @@
+.products {
+  margin-top: 20px;
+}
 .product {
   background-color: white;
   border-radius: 5px;
@@ -43,6 +46,22 @@
     font-size: 16px;
   }
 }
-.products {
-  margin-top: 20px;
+.pagination {
+  margin-top: 15px;
+  ul {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    li {
+      padding: 8px 17px;
+      background-color: white;
+      border-radius: 10px;
+      list-style: none;
+      box-shadow: 1px 2px 3px 0px rgb(228 221 221 / 35%);
+    }
+    li.selected {
+      background: #e60f47;
+      color: white;
+    }
+  }
 }

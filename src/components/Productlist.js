@@ -1,65 +1,62 @@
 import "../App.scss";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Rating } from "react-simple-star-rating";
+import ProductCard from "../components/ProductCard";
+import ReactPaginate from "react-paginate";
 
 function Productlist() {
   const [data, setData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${API_URL}/products?limit=20`)
-      .then((response) => response.json())
-      .then((response) => handleProducts(response));
+    getData(currentPage);
   }, []);
 
-  function handleProducts(response) {
-    console.log(response.products);
+  let getData = (page) => {
+    fetch(`${API_URL}/products?limit=20&page=${page}`)
+      .then((response) => response.json())
+      .then((response) => handleProducts(response));
+  };
+
+  let handleProducts = (response) => {
+    console.log(response);
     setData(response.products);
-  }
+    setCurrentPage(response.page);
+    setTotalPage(response.total_pages);
+  };
+
+  let handlePageClick = async (event) => {
+    getData(event.selected + 1);
+    let products = document.querySelector("#products_container");
+    window.scrollTo({ top: 300, behavior: "smooth" });
+  };
 
   return (
-    <div className="container">
+    <div className="container" id="products_container">
       <div className="row products gy-3 gx-3">
         {data &&
           data.map((product) => {
             return (
               <div className="col-lg-3 col-md-6" key={product.id}>
                 <Link to={`/product/${product.id}`}>
-                  <div className="product">
-                    <img src={product.images.photos[0]} />
-                    <p className="product_title">{product.title}</p>
-                    <p className="product_category">{product.category}</p>
-                    <div className="product_rating">
-                      <Rating
-                        readonly={true}
-                        size={20}
-                        initialValue={product.rating}
-                      />
-                      <span className="product_raters">
-                        {" "}
-                        ({product.raters ? product.raters : 0})
-                      </span>
-                    </div>
-                    {product.priceDiscount ? (
-                      <div className="prices">
-                        <span className="product_price">
-                          {product.priceDiscount}
-                        </span>
-                        <span className="product_dicountPrice">
-                          {product.price}
-                        </span>
-                      </div>
-                    ) : (
-                      <div className="prices">
-                        <span className="product_price">{product.price}</span>
-                      </div>
-                    )}
-                  </div>
+                  <ProductCard product={product} />
                 </Link>
               </div>
             );
           })}
+      </div>
+      <div className="row pagination">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Suivant"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={totalPage}
+          previousLabel="Précédent "
+          renderOnZeroPageCount={null}
+        />
       </div>
     </div>
   );
