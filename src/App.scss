@@ -1,3 +1,6 @@
+.products {
+  margin-top: 20px;
+}
 .product {
   background-color: white;
   border-radius: 5px;
@@ -8,8 +11,9 @@
     width: 100%;
     height: 200px;
     object-fit: contain;
+    border-radius: 10px;
   }
-  .product_price {
+  .product_title {
     width: 200px;
     white-space: nowrap;
     overflow: hidden;
@@ -22,7 +26,43 @@
     color: darkgrey;
     text-transform: capitalize;
   }
+  .product_rating {
+    display: flex;
+    align-items: center;
+  }
+  .product_raters {
+    color: darkgrey;
+  }
+  .prices {
+    margin-top: 10px;
+  }
+  .product_price {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .product_dicountPrice {
+    margin-left: 10px;
+    text-decoration-line: line-through;
+    color: #d62d2d;
+    font-size: 16px;
+  }
 }
-.products {
-  margin-top: 20px;
+.pagination {
+  margin-top: 15px;
+  ul {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    li {
+      padding: 8px 17px;
+      background-color: white;
+      border-radius: 10px;
+      list-style: none;
+      box-shadow: 1px 2px 3px 0px rgb(228 221 221 / 35%);
+    }
+    li.selected {
+      background: #e60f47;
+      color: white;
+    }
+  }
 }

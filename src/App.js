@@ -2,8 +2,7 @@ import "./App.scss";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cartpage";
-import Product from "./pages/Productpage";
-// import React from "react";
+import Productpage from "./pages/Productpage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
@@ -12,11 +11,11 @@ export default function App() {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/:category?">
             <Homepage />
           </Route>
           <Route path="/product/:id">
-            <Product />
+            <Productpage />
           </Route>
           <Route path="/cart">
             <Cart />

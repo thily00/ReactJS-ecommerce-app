@@ -1,5 +1,5 @@
 import "../styles/heroSection.scss";
-import banner from "../assets/banner.webp";
+import banner1 from "../assets/banner/banner1.png";
 
 export default function HeroSection() {
   return (
@@ -13,13 +13,13 @@ export default function HeroSection() {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={banner} className="d-block w-100" alt="..." />
+                <img src={banner1} className="d-block w-100" alt="..." />
               </div>
               <div className="carousel-item">
-                <img src={banner} className="d-block w-100" alt="..." />
+                <img src={banner1} className="d-block w-100" alt="..." />
               </div>
               <div className="carousel-item">
-                <img src={banner} className="d-block w-100" alt="..." />
+                <img src={banner1} className="d-block w-100" alt="..." />
               </div>
             </div>
             <button
