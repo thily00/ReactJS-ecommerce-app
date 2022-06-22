@@ -71,5 +71,24 @@ header {
   li {
     text-transform: capitalize;
     cursor: pointer;
+    padding: 0 5px;
   }
+  li:hover {
+    color: red;
+  }
+}
+
+.activeLink {
+  color: red;
+  position: relative;
+  padding: 0 5px;
+}
+
+.activeLink::after {
+  position: absolute;
+  content: " ";
+  border-bottom: 3px solid red;
+  width: 100%;
+  left: 0;
+  bottom: -10px;
 }

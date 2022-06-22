@@ -4,7 +4,7 @@ import { Rating } from "react-simple-star-rating";
 
 import ImageSlider from "../components/ImageSlider";
 
-function Product() {
+function Productpage() {
   let { id } = useParams();
   const [product, setProduct] = useState(null);
   const API_URL = process.env.REACT_APP_API_URL;
@@ -54,4 +54,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default Productpage;

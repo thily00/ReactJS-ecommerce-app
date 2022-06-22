@@ -4,18 +4,22 @@ import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import ReactPaginate from "react-paginate";
 
-function Productlist() {
+function Productlist({ category }) {
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-  const API_URL = process.env.REACT_APP_API_URL;
+  let API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    getData(currentPage);
-  }, []);
+    getProducts(currentPage);
+  }, [category, currentPage]);
 
-  let getData = (page) => {
-    fetch(`${API_URL}/products?limit=20&page=${page}`)
+  let getProducts = (page) => {
+    category !== undefined
+      ? (API_URL = API_URL += `/products?limit=20&category=${category}`)
+      : (API_URL = API_URL += `/products?limit=20`);
+
+    fetch(`${API_URL}&page=${page}`)
       .then((response) => response.json())
       .then((response) => handleProducts(response));
   };
@@ -23,13 +27,11 @@ function Productlist() {
   let handleProducts = (response) => {
     console.log(response);
     setData(response.products);
-    setCurrentPage(response.page);
     setTotalPage(response.total_pages);
   };
 
   let handlePageClick = async (event) => {
-    getData(event.selected + 1);
-    let products = document.querySelector("#products_container");
+    getProducts(event.selected + 1);
     window.scrollTo({ top: 380, behavior: "smooth" });
   };
 
@@ -51,10 +53,11 @@ function Productlist() {
         <ReactPaginate
           breakLabel="..."
           nextLabel="Suivant"
-          onPageChange={handlePageClick}
+          previousLabel="Précédent "
           pageRangeDisplayed={5}
           pageCount={totalPage}
-          previousLabel="Précédent "
+          initialPage={1}
+          onPageChange={handlePageClick}
           renderOnZeroPageCount={null}
         />
       </div>

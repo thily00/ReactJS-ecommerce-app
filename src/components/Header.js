@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import cart from "../assets/icons/cart.png";
 import whislist from "../assets/icons/whislist.png";
@@ -19,9 +18,27 @@ function Header() {
       .then((categories) => setCategories(categories.categories));
   };
 
+  const checkActive = (match, location) => {
+    if (!location) return false;
+    const { pathname } = location;
+    console.log(pathname);
+    return pathname === "/";
+  };
+
   useEffect(() => {
     getCategories();
-  });
+    // const categories = document.querySelectorAll(".categorie");
+    // let activeCategorie = categories[0];
+    // activeCategorie.classList.add("active");
+    // categories.forEach((categorie) => {
+    //   categorie.addEventListener("click", function () {
+    //     // console.log("ok");
+    //     activeCategorie.classList.remove("active");
+    //     activeCategorie = categorie;
+    //     activeCategorie.classList.add("active");
+    //   });
+    // });
+  }, []);
 
   return (
     <div className="container-fluid header">
@@ -56,10 +73,20 @@ function Header() {
             </nav>
           </header>
           <ul className="categories">
-            <li>Tous</li>
+            <NavLink activeClassName="activeLink" isActive={checkActive} to="/">
+              <li className="categorie">Tous</li>
+            </NavLink>
             {categories &&
               categories.map((category) => {
-                return <li key={category}>{category}</li>;
+                return (
+                  <NavLink
+                    activeClassName="activeLink"
+                    key={category}
+                    to={`/${category}`}
+                  >
+                    <li className="categorie">{category}</li>
+                  </NavLink>
+                );
               })}
           </ul>
         </div>
