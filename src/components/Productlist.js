@@ -30,7 +30,7 @@ function Productlist() {
   let handlePageClick = async (event) => {
     getData(event.selected + 1);
     let products = document.querySelector("#products_container");
-    window.scrollTo({ top: 300, behavior: "smooth" });
+    window.scrollTo({ top: 380, behavior: "smooth" });
   };
 
   return (
