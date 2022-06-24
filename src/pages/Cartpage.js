@@ -1,5 +1,9 @@
-function Cart() {
-  return <p>cart</p>;
+function Cartpage() {
+  return (
+    <>
+      <p>cart</p>
+    </>
+  );
 }
 
-export default Cart;
+export default Cartpage;

@@ -33,6 +33,16 @@ function Productpage() {
             <div className="col-md-6 col-sm-12">
               <p>{product.category}</p>
               <p>{product.title}</p>
+              {product.priceDiscount ? (
+                <div className="prices">
+                  <span className="product_price">{product.priceDiscount}</span>
+                  <span className="product_dicountPrice">{product.price}</span>
+                </div>
+              ) : (
+                <div className="prices">
+                  <span className="product_price">{product.price}</span>
+                </div>
+              )}
               <div className="product_rating">
                 <Rating
                   readonly={true}

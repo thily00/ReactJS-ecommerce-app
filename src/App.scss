@@ -33,20 +33,22 @@
   .product_raters {
     color: darkgrey;
   }
-  .prices {
-    margin-top: 10px;
-  }
-  .product_price {
-    font-size: 20px;
-    font-weight: 500;
-  }
-  .product_dicountPrice {
-    margin-left: 10px;
-    text-decoration-line: line-through;
-    color: #d62d2d;
-    font-size: 16px;
-  }
 }
+
+.prices {
+  margin-top: 10px;
+}
+.product_price {
+  font-size: 20px;
+  font-weight: 500;
+}
+.product_dicountPrice {
+  margin-left: 10px;
+  text-decoration-line: line-through;
+  color: #d62d2d;
+  font-size: 16px;
+}
+
 .pagination {
   margin-top: 15px;
   ul {

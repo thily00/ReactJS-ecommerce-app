@@ -35,6 +35,9 @@ header {
       border-radius: 10px;
       padding-left: 40px;
     }
+    .searchBar:focus-visible {
+      outline: none;
+    }
   }
   nav {
     flex: 0 1 250px;

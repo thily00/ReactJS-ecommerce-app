@@ -10,7 +10,6 @@ export default function ProductCard({ product }) {
       <div className="product_rating">
         <Rating readonly={true} size={20} initialValue={product.rating} />
         <span className="product_raters">
-          {" "}
           ({product.raters ? product.raters : 0})
         </span>
       </div>
@@ -24,6 +23,7 @@ export default function ProductCard({ product }) {
           <span className="product_price">{product.price}</span>
         </div>
       )}
+      <span className="ok"></span>
     </div>
   );
 }

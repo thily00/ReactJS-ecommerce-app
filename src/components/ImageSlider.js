@@ -2,22 +2,28 @@ import { useEffect } from "react";
 import "../styles/ImageSlider.scss";
 function ImageSlider({ product }) {
   useEffect(() => {
+    console.log(product);
     const slides = document.querySelectorAll(".slider_slide");
     const thumbs = document.querySelectorAll(".slider_thumb");
-    let activeThumb = thumbs[0];
-    activeThumb.classList.add("active");
+    console.log("thumbs", thumbs);
+    if (thumbs.length != 0) {
+      let activeThumb = thumbs[0];
+      activeThumb.classList.add("active");
 
-    thumbs.forEach((thumb, index) => {
-      thumb.addEventListener("mouseover", function () {
-        activeThumb.classList.remove("active");
-        activeThumb = thumb;
-        activeThumb.classList.add("active");
-        const thumbIndex = index;
-        slides.forEach((slide, index) => {
-          slide.style.transform = `translateX(${100 * (index - thumbIndex)}%)`;
+      thumbs.forEach((thumb, index) => {
+        thumb.addEventListener("mouseover", function () {
+          activeThumb.classList.remove("active");
+          activeThumb = thumb;
+          activeThumb.classList.add("active");
+          const thumbIndex = index;
+          slides.forEach((slide, index) => {
+            slide.style.transform = `translateX(${
+              100 * (index - thumbIndex)
+            }%)`;
+          });
         });
       });
-    });
+    }
   }, []);
 
   return (
