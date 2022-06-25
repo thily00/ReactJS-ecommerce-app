@@ -26,7 +26,7 @@ function Header() {
   let checkActive = (match, location) => {
     if (!location) return false;
     const { pathname } = location;
-    return pathname === "/";
+    return pathname === "/home";
   };
 
   useEffect(() => {

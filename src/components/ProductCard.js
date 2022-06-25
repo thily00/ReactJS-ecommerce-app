@@ -23,7 +23,9 @@ export default function ProductCard({ product }) {
           <span className="product_price">{product.price}</span>
         </div>
       )}
-      <span className="ok"></span>
+      {product.priceDiscount != null && (
+        <span className="product__badge__promo">Promo</span>
+      )}
     </div>
   );
 }

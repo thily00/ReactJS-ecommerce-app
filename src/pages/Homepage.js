@@ -5,6 +5,8 @@ import Productlist from "../components/Productlist";
 
 function Homepage() {
   const [products, setProducts] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   let { category } = useParams();
   let API_URL = process.env.REACT_APP_API_URL;
 
@@ -20,16 +22,23 @@ function Homepage() {
 
   let handleProducts = (response) => {
     setProducts(response.products);
+    setTotalPage(response.total_pages);
+    // setPage(response.total_pages);
   };
 
   useEffect(() => {
-    getProducts(1);
-  }, [category]);
+    getProducts(page);
+  }, [category, page]);
 
   return (
     <>
       <HeroSection />
-      <Productlist products={products} />
+      <Productlist
+        products={products}
+        totalPage={totalPage}
+        page={setPage}
+        setPage={setPage}
+      />
     </>
   );
 }

@@ -1,12 +1,13 @@
 import "../App.scss";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import ReactPaginate from "react-paginate";
 
-function Productlist({ products }) {
-  // let handlePageClick = async (event) => {
-  //   getProducts(event.selected);
-  //   window.scrollTo({ top: 380, behavior: "smooth" });
-  // };
+function Productlist({ products, totalPage, page, setPage }) {
+  let handlePageClick = async (event) => {
+    setPage(event.selected + 1);
+    window.scrollTo({ top: 380, behavior: "smooth" });
+  };
 
   return (
     <div className="container" id="products_container">
@@ -14,7 +15,7 @@ function Productlist({ products }) {
         {products &&
           products.map((product) => {
             return (
-              <div className="col-lg-3 col-md-6" key={product.id}>
+              <div className="col-lg-3 col-md-4 col-sm-6" key={product.id}>
                 <Link to={`/product/${product.id}`}>
                   <ProductCard product={product} />
                 </Link>
@@ -22,15 +23,15 @@ function Productlist({ products }) {
             );
           })}
         <div className="row pagination">
-          {/* <ReactPaginate
+          <ReactPaginate
+            breakLabel="..."
             nextLabel="Suivant"
-            previousLabel="Précédent "
+            previousLabel="Préc&dent"
+            onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={totalPage}
-            initialPage={1}
-            // forcePage={currentPage}
-            onPageChange={handlePageClick}
-          /> */}
+            renderOnZeroPageCount={null}
+          />
         </div>
       </div>
     </div>

@@ -7,21 +7,34 @@ export default function SearchPage() {
   let { query } = useParams();
   console.log(query);
   const [products, setProducts] = useState(null);
+  const [totalProduct, setTotalProduct] = useState(null);
   let API_URL = process.env.REACT_APP_API_URL;
 
   let getProducts = () => {
     fetch(`${API_URL}/products?limit=20&search=${query}`)
       .then((response) => response.json())
-      .then((response) => setProducts(response.products));
+      .then((response) => {
+        console.log(response);
+        setProducts(response.products);
+        setTotalProduct(response.total_products);
+      });
   };
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [query]);
 
   return (
     <>
-      <div style={{ marginTop: "150px" }}>Résultat de : {query}</div>
+      <div className="container" style={{ marginTop: "150px" }}>
+        <div className="row">
+          <p>
+            <strong>{totalProduct}</strong> Résultat(s) pour{" "}
+            <strong>{query}</strong>
+          </p>
+        </div>
+      </div>
+
       <Productlist products={products} />
     </>
   );
