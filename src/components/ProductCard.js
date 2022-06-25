@@ -1,5 +1,6 @@
 import React from "react";
 import { Rating } from "react-simple-star-rating";
+import "../styles/productCard.scss";
 
 export default function ProductCard({ product }) {
   return (

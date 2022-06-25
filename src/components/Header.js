@@ -6,7 +6,7 @@ import whislist from "../assets/icons/whislist.png";
 import search from "../assets/icons/search.png";
 import "../styles/header.scss";
 
-function Header() {
+function Header({ cartItems }) {
   const [categories, setCategories] = useState(null);
   const API_URL = process.env.REACT_APP_API_URL;
   const history = useHistory();
@@ -58,10 +58,14 @@ function Header() {
                 <li>
                   <NavLink to="/cart">
                     <img src={cart} />
+                    <span className="qty">{cartItems.length}</span>
                   </NavLink>
                 </li>
                 <li>
-                  <img src={whislist} />
+                  <NavLink to="/cart">
+                    <img src={whislist} />
+                    <span className="qty">{cartItems.length}</span>
+                  </NavLink>
                 </li>
               </ul>
             </nav>

@@ -1,11 +1,25 @@
-import { View, Text } from "react-native";
-import React from "react";
+import "../styles/quantity.scss";
 
-export default function Quantity({ Quantity }) {
+export default function Quantity({ quantity, setQuantity }) {
+  let increment = () => {
+    setQuantity(quantity + 1);
+  };
+
+  let decrement = () => {
+    setQuantity(quantity - 1);
+  };
+
   return (
     <div className="quantity">
-      <span> - </span>
-      <span> + </span>
+      <span className="minus" onClick={decrement}>
+        {" "}
+        -{" "}
+      </span>
+      <span>{quantity}</span>
+      <span className="plus" onClick={increment}>
+        {" "}
+        +{" "}
+      </span>
     </div>
   );
 }
