@@ -3,16 +3,7 @@ import toast from "react-hot-toast";
 
 import "../styles/cartPage.scss";
 
-function Cartpage() {
-  const [cartItems, setCartItems] = useState(null);
-  let Cart = JSON.parse(localStorage.getItem("cart"));
-
-  console.log(Cart);
-
-  useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem("cart")));
-  }, []);
-
+function Cartpage({ cartItems, setCartItems }) {
   let increment = (index) => {
     if (cartItems[index].stock >= cartItems[index].qty + 1) {
       let newCart = [...cartItems];
@@ -39,6 +30,13 @@ function Cartpage() {
       localStorage.setItem("cart", JSON.stringify(newCart));
       setCartItems(newCart);
     }
+  };
+
+  let deleteProuct = (index) => {
+    let newCart = [...cartItems];
+    newCart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    setCartItems(newCart);
   };
 
   return (
@@ -68,6 +66,12 @@ function Cartpage() {
                       : (cartItem.price.slice(0, -1) * cartItem.qty).toFixed(2)}
                     €
                   </h3>
+                  <span
+                    onClick={() => deleteProuct(index)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    X
+                  </span>
                 </div>
               );
             })}

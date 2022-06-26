@@ -71,7 +71,7 @@ export default function App() {
             <SearchPage />
           </Route>
           <Route path="/cart">
-            <Cartpage />
+            <Cartpage cartItems={cartItems} setCartItems={setCartItems} />
           </Route>
           <Route path="/">
             <Redirect to="/home" />
