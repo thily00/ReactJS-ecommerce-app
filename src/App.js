@@ -16,17 +16,30 @@ import "./App.scss";
 
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
+  let Cart = localStorage.getItem("cart");
+
+  useEffect(() => {
+    Cart != null && setCartItems(JSON.parse(localStorage.getItem("cart")));
+  }, []);
 
   const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
-      );
+    if (Cart != null) {
+      let oldCart = JSON.parse(localStorage.getItem("cart"));
+      const exist = oldCart.find((x) => x.id === product.id);
+      if (exist) {
+        oldCart = oldCart.map((x) =>
+          x.id === product.id ? { ...x, qty: product.qty } : x
+        );
+      } else {
+        oldCart.push(product);
+      }
+      localStorage.setItem("cart", JSON.stringify(oldCart));
+      setCartItems(oldCart);
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      let cart = [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setCartItems(cart);
     }
   };
 
@@ -45,7 +58,7 @@ export default function App() {
             <SearchPage />
           </Route>
           <Route path="/cart">
-            <Cartpage />
+            <Cartpage cartItems={cartItems} />
           </Route>
           <Route path="/">
             <Redirect to="/home" />

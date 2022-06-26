@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import logo from "../assets/logo.png";
 import cart from "../assets/icons/cart.png";
-import whislist from "../assets/icons/whislist.png";
 import search from "../assets/icons/search.png";
 import "../styles/header.scss";
 
@@ -31,16 +30,19 @@ function Header({ cartItems }) {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  });
 
   return (
     <div className="container-fluid header">
       <div className="container">
         <div className="row">
           <header>
+            <Link to="/home">
+              <img src={logo} className="logo" alt="logo" />
+            </Link>
             <form onSubmit={handleSearch} className="searchForm">
               <label className="searchIcon">
-                <img src={search} />
+                <img src={search} alt="search icon" />
               </label>
               <input
                 className="searchBar"
@@ -49,21 +51,11 @@ function Header({ cartItems }) {
                 placeholder="Rechercher un produit ..."
               />
             </form>
-            <Link to="/home">
-              <img src={logo} className="logo" alt="logo" />
-            </Link>
-
             <nav>
               <ul>
                 <li>
                   <NavLink to="/cart">
-                    <img src={cart} />
-                    <span className="qty">{cartItems.length}</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/cart">
-                    <img src={whislist} />
+                    <img src={cart} alt="cart icon" />
                     <span className="qty">{cartItems.length}</span>
                   </NavLink>
                 </li>

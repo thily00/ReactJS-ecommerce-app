@@ -13,7 +13,7 @@ function Productpage({ onAdd }) {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  });
 
   let getProduct = async () => {
     await fetch(`${API_URL}/products/${id}`)
@@ -57,7 +57,10 @@ function Productpage({ onAdd }) {
               <p className="description">{product.description}</p>
               <Quantity quantity={quantity} setQuantity={setQuantity} />
               <div className="buttons">
-                <button className="btn_primary" onClick={() => onAdd(product)}>
+                <button
+                  className="btn_primary"
+                  onClick={() => onAdd({ ...product, qty: quantity })}
+                >
                   AJOUTER AU PANIER
                 </button>
                 <button className="btn_outline">AJOUTER AU FAVORIS</button>

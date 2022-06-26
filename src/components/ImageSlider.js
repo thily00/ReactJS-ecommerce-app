@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import "../styles/ImageSlider.scss";
 function ImageSlider({ product }) {
   useEffect(() => {
-    console.log(product);
     const slides = document.querySelectorAll(".slider_slide");
     const thumbs = document.querySelectorAll(".slider_thumb");
-    console.log("thumbs", thumbs);
     if (thumbs.length != 0) {
       let activeThumb = thumbs[0];
       activeThumb.classList.add("active");
@@ -37,7 +35,7 @@ function ImageSlider({ product }) {
                 style={{ transform: `translateX(${100 * index}%)` }}
                 key={index}
               >
-                <img src={image} alt="image" />
+                <img src={image} alt="slider img" />
               </div>
             );
           })}

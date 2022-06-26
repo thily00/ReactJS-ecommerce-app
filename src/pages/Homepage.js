@@ -1,43 +1,60 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
+import queryString from "query-string";
 import HeroSection from "../components/HeroSection";
 import Productlist from "../components/Productlist";
 
 function Homepage() {
-  const [products, setProducts] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
-  let { category } = useParams();
   let API_URL = process.env.REACT_APP_API_URL;
+  const [data, setData] = useState(null);
+  const history = useHistory();
+  const { category } = useParams();
+  const { search } = useLocation();
+  const Queries = queryString.parse(search);
 
-  let getProducts = (page) => {
+  let getProducts = () => {
     category !== undefined
       ? (API_URL = API_URL += `/products?limit=20&category=${category}`)
       : (API_URL = API_URL += `/products?limit=20`);
 
-    fetch(`${API_URL}&page=${page}`)
+    Queries.page !== undefined
+      ? (API_URL = API_URL += `&page=${Queries.page}`)
+      : (API_URL = API_URL += `&page=${1}`);
+
+    fetch(`${API_URL}`)
       .then((response) => response.json())
-      .then((response) => handleProducts(response));
+      .then((response) => setData(response));
   };
 
-  let handleProducts = (response) => {
-    setProducts(response.products);
-    setTotalPage(response.total_pages);
-    // setPage(response.total_pages);
+  let handlePageClick = async (event) => {
+    let location;
+    if (category !== undefined) {
+      location = {
+        pathname: `/home/${category}`,
+        search: `?page=${event.selected + 1}`,
+      };
+    } else {
+      location = {
+        pathname: "/home",
+        search: `?page=${event.selected + 1}`,
+      };
+    }
+    history.push(location);
+    window.scrollTo({ top: 380, behavior: "smooth" });
   };
 
   useEffect(() => {
-    getProducts(page);
-  }, [category, page]);
+    getProducts();
+  });
 
   return (
     <>
       <HeroSection />
       <Productlist
-        products={products}
-        totalPage={totalPage}
-        page={setPage}
-        setPage={setPage}
+        products={data?.products}
+        handlePageClick={handlePageClick}
+        category={category}
+        totalPage={data?.total_pages}
       />
     </>
   );
