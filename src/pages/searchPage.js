@@ -7,7 +7,6 @@ import Productlist from "../components/Productlist";
 export default function SearchPage() {
   let { query } = useParams();
   let history = useHistory();
-  console.log(query);
   const [data, setData] = useState(null);
   const { search } = useLocation();
   const Queries = queryString.parse(search);

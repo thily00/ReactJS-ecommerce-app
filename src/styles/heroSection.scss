@@ -1,11 +1,12 @@
 .banner {
   margin-top: 150px;
-  padding: 0;
+  padding: 0 15px;
+  margin-bottom: 20px;
   img {
     width: 100%;
     height: 350px;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 5px;
   }
 }
 

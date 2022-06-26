@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-
 import "../styles/cartPage.scss";
 
 function Cartpage({ cartItems, setCartItems }) {
+  const totalPrices = cartItems.reduce(
+    (a, c) =>
+      c.priceDiscount != null
+        ? a + c.qty * c.priceDiscount.slice(0, -1)
+        : a + c.qty * c.price.slice(0, -1),
+    0
+  );
+
   let increment = (index) => {
     if (cartItems[index].stock >= cartItems[index].qty + 1) {
       let newCart = [...cartItems];
@@ -48,7 +54,7 @@ function Cartpage({ cartItems, setCartItems }) {
               return (
                 <div key={cartItem.id} className="cart">
                   <img src={cartItem.images.photos[0]} alt="item" />
-                  <h3>{cartItem.title}</h3>
+                  <p>{cartItem.title}</p>
                   <div className="quantity">
                     <span className="minus" onClick={() => decrement(index)}>
                       -
@@ -76,6 +82,8 @@ function Cartpage({ cartItems, setCartItems }) {
               );
             })}
         </div>
+        <hr style={{ margin: "20px 0px" }} />
+        <p className="totalPrice">Total : {totalPrices}€</p>
       </div>
     </div>
   );
