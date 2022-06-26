@@ -5,7 +5,7 @@ import "../styles/productCard.scss";
 export default function ProductCard({ product }) {
   return (
     <div className="product">
-      <img src={product.images.photos[0]} />
+      <img src={product.images.photos[0]} alt="product img" />
       <p className="product_title">{product.title}</p>
       <p className="product_category">{product.category}</p>
       <div className="product_rating">

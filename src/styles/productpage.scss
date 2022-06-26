@@ -32,21 +32,13 @@
   }
   .buttons {
     display: flex;
-    gap: 5px;
+    gap: 10px;
   }
   .btn_primary {
     background-color: #e60f47;
     border: none;
     font-size: 14px;
     color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
-  }
-  .btn_outline {
-    background-color: none;
-    border: 1px solid #e60f47;
-    font-size: 14px;
-    color: #e60f47;
     padding: 10px 15px;
     border-radius: 10px;
   }

@@ -45,7 +45,7 @@ function Homepage() {
 
   useEffect(() => {
     getProducts();
-  });
+  }, [category, Queries.page]);
 
   return (
     <>

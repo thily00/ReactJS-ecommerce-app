@@ -4,7 +4,7 @@ function ImageSlider({ product }) {
   useEffect(() => {
     const slides = document.querySelectorAll(".slider_slide");
     const thumbs = document.querySelectorAll(".slider_thumb");
-    if (thumbs.length != 0) {
+    if (thumbs.length !== 0) {
       let activeThumb = thumbs[0];
       activeThumb.classList.add("active");
 
@@ -44,7 +44,7 @@ function ImageSlider({ product }) {
           {product.images.thumbs.map((thumb, index) => {
             return (
               <div className="slider_thumb" key={index}>
-                <img src={thumb} alt="image" />
+                <img src={thumb} alt="slider thumb img" />
               </div>
             );
           })}

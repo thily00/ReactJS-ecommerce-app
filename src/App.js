@@ -6,6 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
@@ -20,9 +21,9 @@ export default function App() {
 
   useEffect(() => {
     Cart != null && setCartItems(JSON.parse(localStorage.getItem("cart")));
-  }, []);
+  }, [Cart]);
 
-  const onAdd = (product) => {
+  const AddToCart = (product) => {
     if (Cart != null) {
       let oldCart = JSON.parse(localStorage.getItem("cart"));
       const exist = oldCart.find((x) => x.id === product.id);
@@ -35,11 +36,23 @@ export default function App() {
       }
       localStorage.setItem("cart", JSON.stringify(oldCart));
       setCartItems(oldCart);
+      toast.success("Ajouté au panier.", {
+        style: {
+          padding: "15px 50px",
+          border: "1px solid lightgreen",
+        },
+      });
     } else {
       let cart = [];
       cart.push(product);
       localStorage.setItem("cart", JSON.stringify(cart));
       setCartItems(cart);
+      toast.success("Ajouté au panier.", {
+        style: {
+          padding: "15px 50px",
+          border: "1px solid lightgreen",
+        },
+      });
     }
   };
 
@@ -52,13 +65,13 @@ export default function App() {
             <Homepage />
           </Route>
           <Route path="/product/:id">
-            <Productpage onAdd={onAdd} />
+            <Productpage AddToCart={AddToCart} />
           </Route>
           <Route path="/search/:query?" exact>
             <SearchPage />
           </Route>
           <Route path="/cart">
-            <Cartpage cartItems={cartItems} />
+            <Cartpage />
           </Route>
           <Route path="/">
             <Redirect to="/home" />
@@ -66,6 +79,7 @@ export default function App() {
         </Switch>
         <Footer />
       </Router>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }

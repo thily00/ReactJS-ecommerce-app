@@ -30,7 +30,7 @@ function Header({ cartItems }) {
 
   useEffect(() => {
     getCategories();
-  });
+  }, []);
 
   return (
     <div className="container-fluid header">

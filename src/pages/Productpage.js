@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
+import toast from "react-hot-toast";
 import ImageSlider from "../components/ImageSlider";
 import Quantity from "../components/Quantity";
 import "../styles/productpage.scss";
 
-function Productpage({ onAdd }) {
+function Productpage({ AddToCart }) {
   let { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -13,7 +14,7 @@ function Productpage({ onAdd }) {
 
   useEffect(() => {
     getProduct();
-  });
+  }, []);
 
   let getProduct = async () => {
     await fetch(`${API_URL}/products/${id}`)
@@ -21,6 +22,19 @@ function Productpage({ onAdd }) {
       .then((response) => {
         setProduct(response);
       });
+  };
+
+  let Add = (product) => {
+    if (product.stock >= product.qty) {
+      AddToCart(product);
+    } else {
+      toast.error(`il y en a que ${product.stock} article(s) en stock`, {
+        style: {
+          padding: "15px 50px",
+          border: "1px solid red",
+        },
+      });
+    }
   };
 
   return (
@@ -55,15 +69,19 @@ function Productpage({ onAdd }) {
                 </div>
               )}
               <p className="description">{product.description}</p>
-              <Quantity quantity={quantity} setQuantity={setQuantity} />
+
               <div className="buttons">
+                <Quantity
+                  stock={product.stock}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
                 <button
                   className="btn_primary"
-                  onClick={() => onAdd({ ...product, qty: quantity })}
+                  onClick={() => Add({ ...product, qty: quantity })}
                 >
                   AJOUTER AU PANIER
                 </button>
-                <button className="btn_outline">AJOUTER AU FAVORIS</button>
               </div>
             </div>
           </div>
