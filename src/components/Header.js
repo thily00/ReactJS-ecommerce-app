@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import logo from "../assets/logo.png";
 import cart from "../assets/icons/cart.png";
-import whislist from "../assets/icons/whislist.png";
-import cart_white from "../assets/icons/cart_white.png";
-import whislist_white from "../assets/icons/whislist_white.png";
 import search from "../assets/icons/search.png";
 import "../styles/header.scss";
 
-function Header() {
+function Header({ cartItems }) {
   const [categories, setCategories] = useState(null);
   const API_URL = process.env.REACT_APP_API_URL;
+  const history = useHistory();
 
   let getCategories = () => {
     fetch(`${API_URL}/categories`)
@@ -18,26 +16,20 @@ function Header() {
       .then((categories) => setCategories(categories.categories));
   };
 
-  const checkActive = (match, location) => {
+  let handleSearch = (event) => {
+    event.preventDefault();
+    const query = event.currentTarget.elements.search.value;
+    history.push(`/search/${query}`);
+  };
+
+  let checkActive = (match, location) => {
     if (!location) return false;
     const { pathname } = location;
-    console.log(pathname);
-    return pathname === "/";
+    return pathname === "/home";
   };
 
   useEffect(() => {
     getCategories();
-    // const categories = document.querySelectorAll(".categorie");
-    // let activeCategorie = categories[0];
-    // activeCategorie.classList.add("active");
-    // categories.forEach((categorie) => {
-    //   categorie.addEventListener("click", function () {
-    //     // console.log("ok");
-    //     activeCategorie.classList.remove("active");
-    //     activeCategorie = categorie;
-    //     activeCategorie.classList.add("active");
-    //   });
-    // });
   }, []);
 
   return (
@@ -45,29 +37,27 @@ function Header() {
       <div className="container">
         <div className="row">
           <header>
-            <form className="searchForm">
+            <Link to="/home">
+              <img src={logo} className="logo" alt="logo" />
+            </Link>
+            <form onSubmit={handleSearch} className="searchForm">
               <label className="searchIcon">
-                <img src={search} />
+                <img src={search} alt="search icon" />
               </label>
               <input
                 className="searchBar"
+                id="search"
                 type="search"
                 placeholder="Rechercher un produit ..."
               />
             </form>
-            <Link to="/">
-              <img src={logo} className="logo" alt="logo" />
-            </Link>
-
             <nav>
               <ul>
                 <li>
-                  <Link to="/cart">
-                    <img src={cart} />
-                  </Link>
-                </li>
-                <li>
-                  <img src={whislist} />
+                  <NavLink to="/cart">
+                    <img src={cart} alt="cart icon" />
+                    <span className="qty">{cartItems.length}</span>
+                  </NavLink>
                 </li>
               </ul>
             </nav>
@@ -82,7 +72,7 @@ function Header() {
                   <NavLink
                     activeClassName="activeLink"
                     key={category}
-                    to={`/${category}`}
+                    to={`/home/${category}`}
                   >
                     <li className="categorie">{category}</li>
                   </NavLink>

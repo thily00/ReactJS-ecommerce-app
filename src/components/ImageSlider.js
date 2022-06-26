@@ -4,20 +4,24 @@ function ImageSlider({ product }) {
   useEffect(() => {
     const slides = document.querySelectorAll(".slider_slide");
     const thumbs = document.querySelectorAll(".slider_thumb");
-    let activeThumb = thumbs[0];
-    activeThumb.classList.add("active");
+    if (thumbs.length !== 0) {
+      let activeThumb = thumbs[0];
+      activeThumb.classList.add("active");
 
-    thumbs.forEach((thumb, index) => {
-      thumb.addEventListener("mouseover", function () {
-        activeThumb.classList.remove("active");
-        activeThumb = thumb;
-        activeThumb.classList.add("active");
-        const thumbIndex = index;
-        slides.forEach((slide, index) => {
-          slide.style.transform = `translateX(${100 * (index - thumbIndex)}%)`;
+      thumbs.forEach((thumb, index) => {
+        thumb.addEventListener("mouseover", function () {
+          activeThumb.classList.remove("active");
+          activeThumb = thumb;
+          activeThumb.classList.add("active");
+          const thumbIndex = index;
+          slides.forEach((slide, index) => {
+            slide.style.transform = `translateX(${
+              100 * (index - thumbIndex)
+            }%)`;
+          });
         });
       });
-    });
+    }
   }, []);
 
   return (
@@ -31,7 +35,7 @@ function ImageSlider({ product }) {
                 style={{ transform: `translateX(${100 * index}%)` }}
                 key={index}
               >
-                <img src={image} alt="image" />
+                <img src={image} alt="slider img" />
               </div>
             );
           })}
@@ -40,7 +44,7 @@ function ImageSlider({ product }) {
           {product.images.thumbs.map((thumb, index) => {
             return (
               <div className="slider_thumb" key={index}>
-                <img src={thumb} alt="image" />
+                <img src={thumb} alt="slider thumb img" />
               </div>
             );
           })}

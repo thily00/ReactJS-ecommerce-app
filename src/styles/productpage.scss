@@ -1,0 +1,45 @@
+.product__sheet {
+  .category {
+    text-transform: capitalize;
+    color: gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .title {
+    margin-bottom: 5px;
+    font-size: 24px;
+  }
+  .product_price {
+    font-size: 32px;
+    font-weight: 500;
+  }
+  .product_dicountPrice {
+    margin-left: 10px;
+    text-decoration-line: line-through;
+    color: #d62d2d;
+    font-size: 16px;
+  }
+  .product_rating {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+  }
+  .description {
+    margin-top: 10px;
+    font-size: 14px;
+    color: gray;
+    text-align: justify;
+  }
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  .btn_primary {
+    background-color: #e60f47;
+    border: none;
+    font-size: 14px;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+  }
+}
